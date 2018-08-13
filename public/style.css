@@ -1,3 +1,19 @@
-.main-color{
-	background-color: #009E8E
+body,html{
+	margin: 0;
+	padding: 0;
+	/*background-color: #58BAC9;*/
 }
+
+
+/*.default-container{*/
+	/*padding-left: 12%;*/
+	/*padding-right: 12%;*/
+/*}*/
+
+
+
+/*@media screen and (max-width: 768px) {*/
+	/*.default-container {*/
+		/*padding: 0;*/
+	/*}*/
+/*}*/

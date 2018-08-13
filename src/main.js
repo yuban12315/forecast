@@ -1,10 +1,17 @@
 import Vue from 'vue/dist/vue'
+import './plugins/axios'
 
 import VueRouter from 'vue-router'
 import ElementUI from 'element-ui';
+import axios from 'axios'
+
+import 'element-ui/lib/theme-chalk/index.css'
+import '../public/style.css'
+
 //安装额外功能
 Vue.use(ElementUI)
 Vue.use(VueRouter)
+Vue.$axios=axios
 
 Vue.config.productionTip = false
 
@@ -13,16 +20,13 @@ Vue.config.productionTip = false
 // 通过 Vue.extend() 创建的组件构造器，
 // 或者，只是一个组件配置对象。
 import HelloWorld from './components/HelloWorld'
-
-const User = {
-    template: '<div>User</div>'
-}
+import MainPage from './components/MainPage'
 
 //创建 router 实例，然后传 `routes` 配置
 const router = new VueRouter({
     routes: [
         // 动态路径参数 以冒号开头
-        { path: '/', component: HelloWorld }
+        { path: '/', component: MainPage }
     ],
     scrollBehavior(to, from, savedPosition) {
         if (savedPosition) {
