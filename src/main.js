@@ -22,12 +22,14 @@ Vue.config.productionTip = false
 // 通过 Vue.extend() 创建的组件构造器，
 // 或者，只是一个组件配置对象。
 import MainPage from './components/MainPage'
+import SunRise from './components/SunRise'
 
 //创建 router 实例，然后传 `routes` 配置
 const router = new VueRouter({
     routes: [
         // 动态路径参数 以冒号开头
-        { path: '/', component: MainPage }
+        { path: '/', component: MainPage },
+        {path:'/sun',component:}
     ],
     scrollBehavior(to, from, savedPosition) {
         if (savedPosition) {

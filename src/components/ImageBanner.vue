@@ -1,7 +1,11 @@
 <template>
     <div class="background" v-bind:style="{backgroundImage:`url(${this.image})`}">
         <el-row>
-            <el-col :xs="{span:18,offset:3}" :md="{span: 12, offset: 6}" :lg="{span: 12, offset: 6}">111</el-col>
+            <el-col :xs="{span:18,offset:3}" :sm="{span:18,offset:3}" :md="{span: 12, offset: 6}" :lg="{span: 12, offset: 6}">
+
+
+
+            </el-col>
         </el-row>
     </div>
 </template>
