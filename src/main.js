@@ -6,12 +6,14 @@ import ElementUI from 'element-ui';
 import axios from 'axios'
 
 import 'element-ui/lib/theme-chalk/index.css'
-import '../public/style.css'
+import './assets/style.css'
+
 
 //安装额外功能
 Vue.use(ElementUI)
 Vue.use(VueRouter)
-Vue.$axios=axios
+axios.defaults.withCredentials = true;
+Vue.prototype.$axios = axios;
 
 Vue.config.productionTip = false
 
@@ -19,7 +21,6 @@ Vue.config.productionTip = false
 // 每个路由应该映射一个组件。 其中"component" 可以是
 // 通过 Vue.extend() 创建的组件构造器，
 // 或者，只是一个组件配置对象。
-import HelloWorld from './components/HelloWorld'
 import MainPage from './components/MainPage'
 
 //创建 router 实例，然后传 `routes` 配置

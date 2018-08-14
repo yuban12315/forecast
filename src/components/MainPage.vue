@@ -1,16 +1,15 @@
 <template>
 
     <el-container>
-        1
-        <ImageBox></ImageBox>
+        <ImageBanner></ImageBanner>
     </el-container>
 </template>
 <script>
-    import ImageBox from './ImageBox'
+    import ImageBanner from './ImageBanner'
     export default{
         name:'ManageCity',
         components:{
-          ImageBox
+            ImageBanner
         },
         data(){
             return{
