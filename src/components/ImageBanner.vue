@@ -43,7 +43,7 @@
                 images: [
                     bg_sunny, bg_cloudy, bg_sandy, bg_foggy, bg_snow, bg_smog,bg_rainy
                 ],
-                weatherData: {}
+                weatherData: {location:{},now:{}}
             }
         },
         methods: {
