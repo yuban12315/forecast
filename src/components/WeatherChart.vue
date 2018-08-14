@@ -8,7 +8,9 @@
     export default {
         name: "WeatherChart",
         data(){
-            weatherDataList
+            return{
+                weatherDataList
+            }
         }
     }
 </script>
