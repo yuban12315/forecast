@@ -79,13 +79,17 @@
                 this.image=this.images[this.weather]
 
             },
-            async getWeather() {
-                this.weatherData = {"location":{"id":"WRNP70PG2MPX","name":"包头","country":"CN","path":"包头,包头,内蒙古,中国","timezone":"Asia/Shanghai","timezone_offset":"+08:00"},"now":{"text":"小雨","code":"0","temperature":"27","feels_like":"27","pressure":"897","humidity":"60","visibility":"25.4","wind_direction":"东","wind_direction_degree":"99","wind_speed":"10.44","wind_scale":"2","clouds":"0","dew_point":""},"last_update":"2018-08-14T11:25:00+08:00"}
+            async getWeather(city) {
+                // this.weatherData = {"location":{"id":"WRNP70PG2MPX","name":"包头","country":"CN","path":"包头,包头,内蒙古,中国","timezone":"Asia/Shanghai","timezone_offset":"+08:00"},"now":{"text":"小雨","code":"0","temperature":"27","feels_like":"27","pressure":"897","humidity":"60","visibility":"25.4","wind_direction":"东","wind_direction_degree":"99","wind_speed":"10.44","wind_scale":"2","clouds":"0","dew_point":""},"last_update":"2018-08-14T11:25:00+08:00"}
+                const url=`https://api.seniverse.com/v3/weather/now.json?key=afmlz62jdx69kmph&location=${city}&language=zh-Hans&unit=c`
+                const res=await this.$axios.post(`/api/url`,{url})
+                console.log(res.data.results[0])
+                this.weatherData=res.data.results[0]
                 this.setWeather(this.weatherData)
             }
         },
         async created() {
-            await this.getWeather()
+            await this.getWeather('beijing')
 
         }
     }
