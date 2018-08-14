@@ -9,3 +9,7 @@ body,html{
 	font-family: 'miui';
 	src: url("./Miui-Thin.ttf") format('truetype');
 }
+
+.nopadding{
+	padding: 0;
+}

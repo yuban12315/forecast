@@ -2,9 +2,12 @@
     <div class="background" v-bind:style="{backgroundImage:`url(${this.image})`}">
         <el-row>
             <el-col :xs="{span:18,offset:3}" :sm="{span:18,offset:3}" :md="{span: 12, offset: 6}" :lg="{span: 12, offset: 6}">
-
-
-
+                <div class="banner">
+                    <div class="temperature">{{weatherData.now.temperature}}&#8451;</div>
+                    <div class="city">{{weatherData.location.name}}</div>
+                    <div class="weather-text">{{weatherData.now.text}}</div>
+                    <div class="visibility">能见度：{{weatherData.now.visibility}}</div>
+                </div>
             </el-col>
         </el-row>
     </div>
@@ -66,6 +69,7 @@
                         case "暴雨":
                         case "雷阵雨":
                             this.weather=this.weathers.rainy
+                            break;
                         default:
                             this.weather=this.weathers.sunny
                     }
@@ -76,32 +80,7 @@
 
             },
             async getWeather() {
-                this.weatherData = {
-                    "location": {
-                        "id": "WX4FBXXFKE4F",
-                        "name": "北京",
-                        "country": "CN",
-                        "path": "北京,北京,中国",
-                        "timezone": "Asia/Shanghai",
-                        "timezone_offset": "+08:00"
-                    },
-                    "now": {
-                        "text": "小雨",
-                        "code": "4",
-                        "temperature": "28",
-                        "feels_like": "28",
-                        "pressure": "1003",
-                        "humidity": "76",
-                        "visibility": "6.2",
-                        "wind_direction": "东南",
-                        "wind_direction_degree": "121",
-                        "wind_speed": "4.32",
-                        "wind_scale": "1",
-                        "clouds": "50",
-                        "dew_point": ""
-                    },
-                    "last_update": "2018-08-13T22:25:00+08:00"
-                }
+                this.weatherData = {"location":{"id":"WRNP70PG2MPX","name":"包头","country":"CN","path":"包头,包头,内蒙古,中国","timezone":"Asia/Shanghai","timezone_offset":"+08:00"},"now":{"text":"小雨","code":"0","temperature":"27","feels_like":"27","pressure":"897","humidity":"60","visibility":"25.4","wind_direction":"东","wind_direction_degree":"99","wind_speed":"10.44","wind_scale":"2","clouds":"0","dew_point":""},"last_update":"2018-08-14T11:25:00+08:00"}
                 this.setWeather(this.weatherData)
             }
         },
@@ -117,7 +96,29 @@
         width: 100%;
         height: 300px;
         color: white;
-        font-family: miui;
+        font-family:  "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        font-weight: 300;
+
+        /*background: repeat;*/
+        /*background-size:400px 300px;*/
+    }
+
+    .banner{
+        margin-top: 2%;
+        font-size: 20px;
+    }
+    .temperature{
+        display: block;
+        font-size: 100px;
+    }
+    .city{
+        margin-top: 0.5%;
+    }
+    .weather-text{
+        margin-top: 0.5%;
+    }
+    .visibility{
+        margin-top: 0.5%;
     }
 
 </style>
