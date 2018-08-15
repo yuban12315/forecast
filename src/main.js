@@ -6,9 +6,10 @@ import ElementUI from 'element-ui';
 import axios from 'axios'
 import echarts from 'echarts'
 
+
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/style.css'
-
+import 'echarts/theme/macarons'
 
 //安装额外功能
 Vue.use(ElementUI)
