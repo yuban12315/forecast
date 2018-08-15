@@ -186,7 +186,7 @@
         }
     }
 
-    window.onresize = function(){
+    window.onresize = function () {
         window.location.reload()
     }
 
