@@ -9,26 +9,26 @@
             <el-row :gutter="5">
                 <el-col :span="6">
                     <div class="sun-msg">
-                        <div id="fx"></div>
-                        <div id="fj"></div>
+                        <div id="fx">{{wind_direction}}</div>
+                        <div id="fj">{{wind_scale}}</div>
                     </div>
                 </el-col>
                 <el-col :span="6">
                     <div class="sun-msg">
                         <div>相对湿度</div>
-                        <div id="sd"></div>
+                        <div id="sd">{{humidity}}</div>
                     </div>
                 </el-col>
                 <el-col :span="6">
                     <div class="sun-msg">
                         <div>体感温度</div>
-                        <div id="wd"></div>
+                        <div id="wd">{{feels_like}}</div>
                     </div>
                 </el-col>
                 <el-col :span="6">
                     <div class="sun-msg-last">
                         <div>气压</div>
-                        <div id="qy"></div>
+                        <div id="qy">{{pressure}}</div>
                     </div>
                 </el-col>
             </el-row>
@@ -38,19 +38,30 @@
 
 <script>
     // 风力等级
-    var wind_direction
-    var wind_scale
+    // var wind_direction
+    // var wind_scale
     // 相对湿度
-    var humidity
+    // var humidity
     // 体感温度
-    var feels_like
+    // var feels_like
     // 气压
-    var pressure
+    // var pressure
 
-    var day_begin = '日出 06:00'
-    var day_end = '日落 18:00'
+    // var day_begin = '日出 06:00'
+    // var day_end = '日落 18:00'
     export default {
         name: "SunRise",
+        data() {
+            return {
+                wind_direction: '',
+                wind_scale: '',
+                humidity: '',
+                feels_like: '',
+                pressure: '',
+                day_begin: '日出 06:00',
+                day_end: '日落 18:00',
+            }
+        },
         methods: {
             canvas(t) {
                 var sun = document.getElementById("sun")
@@ -117,30 +128,30 @@
                 context.fillStyle = '#ff7411';
                 context.lineWidth = 1;
                 context.font = '10px'
-                context.fillText(day_begin, 20, h - 3);
+                context.fillText(this.day_begin, 20, h - 3);
 
                 context.beginPath();
                 context.fillStyle = '#ff7411';
                 context.lineWidth = 1;
                 context.font = '10px'
-                context.fillText(day_end, w - 70, h - 3);
+                context.fillText(this.day_end, w - 70, h - 3);
 
                 /**
                  * 画虚线
                  */
                 while (t < 1) {
-                    t += 0.1;
+                    t += 0.05;
                     sun_x = (1 - t) * (1 - t) * 0 + 2 * t * (1 - t) * w / 2 + t * t * w
                     sun_y = (1 - t) * (1 - t) * h + 2 * t * (1 - t) * (-h / 2) + t * t * h
                     context.beginPath();
                     context.strokeStyle = '#ffffff';
                     context.lineWidth = 3;
                     context.moveTo(sun_x, sun_y);
-                    t += 0.1;
+                    t += 0.05
                     sun_x = (1 - t) * (1 - t) * 0 + 2 * t * (1 - t) * w / 2 + t * t * w
                     sun_y = (1 - t) * (1 - t) * h + 2 * t * (1 - t) * (-h / 2) + t * t * h
                     context.lineTo(sun_x, sun_y)
-                    context.stroke();
+                    context.stroke()
                 }
             },
 
@@ -148,13 +159,11 @@
                 const url = `https://api.seniverse.com/v3/weather/now.json?key=afmlz62jdx69kmph&location=${city}&language=zh-Hans&unit=c`
                 const res = await this.$axios.post(`/testApi/url.action`, {url})
 
-                wind_direction = res.data.results[0]['now']['wind_direction']
-                wind_scale = res.data.results[0]['now']['wind_scale']
-                humidity = res.data.results[0]['now']['humidity']
-                feels_like = res.data.results[0]['now']['feels_like']
-                pressure = res.data.results[0]['now']['pressure']
-
-                this.showBottom()
+                this.wind_direction = res.data.results[0]['now']['wind_direction']
+                this.wind_scale = res.data.results[0]['now']['wind_scale'] + "级"
+                this.humidity = res.data.results[0]['now']['humidity'] + "%"
+                this.feels_like = res.data.results[0]['now']['feels_like'] + "℃"
+                this.pressure = res.data.results[0]['now']['pressure'] + "mb"
             },
 
             showTop() {
@@ -165,19 +174,6 @@
                 } else {
                     this.canvas(1)
                 }
-            },
-
-            showBottom() {
-                var fx = document.getElementById('fx')
-                fx.innerText = wind_direction + "风"
-                var fj = document.getElementById('fj')
-                fj.innerText = wind_scale + "级"
-                var sd = document.getElementById('sd')
-                sd.innerText = humidity + "%"
-                var wd = document.getElementById('wd')
-                wd.innerText = feels_like + '℃'
-                var qy = document.getElementById('qy')
-                qy.innerText = pressure + 'mb'
             }
         },
         async mounted() {
@@ -193,9 +189,10 @@
 </script>
 
 <style scoped>
-    div{
+    div {
         color: #656565;
     }
+
     .sun-body {
         width: 100%;
         height: 200px;
