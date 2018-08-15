@@ -4,18 +4,18 @@ import './plugins/axios'
 import VueRouter from 'vue-router'
 import ElementUI from 'element-ui';
 import axios from 'axios'
-import VCharts from 'v-charts'
+import echarts from 'echarts'
 
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/style.css'
-
+import 'echarts/theme/macarons'
 
 //安装额外功能
 Vue.use(ElementUI)
 Vue.use(VueRouter)
-Vue.use(VCharts)
 axios.defaults.withCredentials = true;
-Vue.prototype.$axios = axios;
+Vue.prototype.$axios = axios
+Vue.prototype.$echarts = echarts
 
 Vue.config.productionTip = false
 
@@ -25,13 +25,16 @@ Vue.config.productionTip = false
 // 或者，只是一个组件配置对象。
 import MainPage from './components/MainPage'
 import SunRise from './components/SunRise'
+import Test from './components/WeatherChart'
 
 //创建 router 实例，然后传 `routes` 配置
 const router = new VueRouter({
     routes: [
         // 动态路径参数 以冒号开头
         { path: '/', component: MainPage },
-        {path:'/sun',component:SunRise}
+        {path:'/sun',component:SunRise},
+        {path:'/test',component:Test}
+
     ],
     scrollBehavior(to, from, savedPosition) {
         if (savedPosition) {

@@ -1,34 +1,26 @@
 <template>
-    <el-row>
-        <el-col :span="18" :offset="3" class="scroll">
-            <div class="chart">
-                <div id="myChart" :style="{width: '1500px', height: '300px'}"></div>
-            </div>
-        </el-col>
-    </el-row>
-
+    <div id="myChart" :style="{width: '1500px', height: '300px'}"></div>
 </template>
 
 <script>
-
-
 
     const option = {
         legend: {
             data: ['最高气温']
             ,selectedMode:false,
         },
-        grid: {
-            x: 20, y: 20, x2: 20, y2:50
-        },
         calculable: false,
+        grid: {
+            x: 20, y: 0, x2: 20, y2: 0
+        },
         xAxis: [
             {
-                show:true,
                 splitLine: {
                     show: false
                 },
-
+                axisTick: {
+                    show: false
+                },
                 type: 'category',
                 boundaryGap: false,
                 data: ['1', '2', '3', '4','1', '2', '3', '4','1', '2', '3', '4','1', '2', '3', '4','1', '2', '3', '4','1', '2', '3', '4',]
@@ -59,47 +51,29 @@
             }
         ]
     };
+
+
     export default {
-        name: "WeatherChart",
+        name: 'hello',
         data() {
             return {
-                weatherData:{}
+                msg: 'Welcome to Your Vue.js App'
             }
         },
-        methods:{
+        mounted() {
+            this.drawLine();
+        },
+        methods: {
             drawLine() {
                 // 基于准备好的dom，初始化echarts实例
                 let myChart = this.$echarts.init(document.getElementById('myChart'), 'macarons')
                 // 绘制图表
                 myChart.setOption(option);
-            },
-            async getWeather(city){
-                const url=`https://api.seniverse.com/v3/weather/hourly.json?key=afmlz62jdx69kmph&location=${city}&language=zh-Hans&unit=c&start=0&hours=24`
-                const res=this.$axios.post('/api/url',{url})
-                this.weatherData=res.data.results[0]
-                console.log(this.weatherData)
             }
-        },
-        mounted(){
-            this.drawLine()
         }
-
     }
 </script>
 
 <style scoped>
-    .scroll{
-        overflow: hidden;
-    }
-    .chart {
-        width: 100%;
-        height: 300px;
-        overflow-x: scroll;
-        overflow-y: hidden;
-    }
 
-    #myChart {
-        width: 1600px;
-        height: 300px;
-    }
 </style>

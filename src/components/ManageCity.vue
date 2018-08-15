@@ -1,8 +1,9 @@
 <template>
-	<div>
-		sdsd55
-		<el-input v-model="input" placeholder="请输入内容"></el-input>
-	</div>
+	<el-row>
+		<el-col>
+			<el-input v-model="input" placeholder="请输入内容"></el-input>
+		</el-col>
+	</el-row>
 </template>
 <script>
 

@@ -1,27 +1,31 @@
 <template>
-    <el-container>
-       <el-main class="nopadding">
-           <ImageBanner></ImageBanner>
-           <WeatherChart></WeatherChart>
-       </el-main>
+    <el-container class="container">
+        <el-main class="nopadding">
+            <ImageBanner></ImageBanner>
+            <WeatherChart></WeatherChart>
+        </el-main>
     </el-container>
 </template>
 <script>
     import ImageBanner from './ImageBanner'
     import WeatherChart from './WeatherChart'
-    export default{
-        name:'ManageCity',
-        components:{
+
+    export default {
+        name: 'ManageCity',
+        components: {
             ImageBanner,
             WeatherChart
         },
-        data(){
-            return{
-                input:''
+        data() {
+            return {
+                input: ''
             }
         }
     }
 </script>
 
 <style scoped>
+    .container{
+        overflow-x: hidden;
+    }
 </style>
