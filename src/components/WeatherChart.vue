@@ -1,6 +1,6 @@
 <template>
     <el-row>
-        <el-col :span="18" :offset="3" class="scroll">
+        <el-col :span="18" :offset="3" :xs="{span:22,offset:1}" class="scroll">
             <div class="chart">
                 <div id="myChart" :style="{width: '1500px', height: '300px'}"></div>
             </div>
@@ -12,31 +12,29 @@
 <script>
 
 
-
     const option = {
         legend: {
             data: ['最高气温']
-            ,selectedMode:false,
+            , selectedMode: false,
         },
         grid: {
-            x: 20, y: 20, x2: 20, y2:50
+            x: 20, y: 20, x2: 20, y2: 50
         },
         calculable: false,
         xAxis: [
             {
-                show:true,
+                show: true,
                 splitLine: {
                     show: false
                 },
-
                 type: 'category',
                 boundaryGap: false,
-                data: ['1', '2', '3', '4','1', '2', '3', '4','1', '2', '3', '4','1', '2', '3', '4','1', '2', '3', '4','1', '2', '3', '4',]
+                data: ['1', '2', '3', '4', '1', '2', '3', '4', '1', '2', '3', '4', '1', '2', '3', '4', '1', '2', '3', '4', '1', '2', '3', '4',]
             }
         ],
         yAxis: [
             {
-                min:5,
+                min: 5,
                 show: false,
                 scale: true,
                 type: 'value',
@@ -50,7 +48,7 @@
                 itemStyle: {
                     normal: {
                         label: {show: true, formatter: '{c}°C'},
-                        borderWidth:6
+                        borderWidth: 6
                     }
                 },
                 name: '最高气温',
@@ -63,24 +61,24 @@
         name: "WeatherChart",
         data() {
             return {
-                weatherData:{}
+                weatherData: {}
             }
         },
-        methods:{
+        methods: {
             drawLine() {
                 // 基于准备好的dom，初始化echarts实例
                 let myChart = this.$echarts.init(document.getElementById('myChart'), 'macarons')
                 // 绘制图表
                 myChart.setOption(option);
             },
-            async getWeather(city){
-                const url=`https://api.seniverse.com/v3/weather/hourly.json?key=afmlz62jdx69kmph&location=${city}&language=zh-Hans&unit=c&start=0&hours=24`
-                const res=this.$axios.post('/api/url',{url})
-                this.weatherData=res.data.results[0]
+            async getWeather(city) {
+                const url = `https://api.seniverse.com/v3/weather/hourly.json?key=afmlz62jdx69kmph&location=${city}&language=zh-Hans&unit=c&start=0&hours=24`
+                const res = this.$axios.post('/api/url', {url})
+                this.weatherData = res.data.results[0]
                 console.log(this.weatherData)
             }
         },
-        mounted(){
+        mounted() {
             this.drawLine()
         }
 
@@ -88,9 +86,10 @@
 </script>
 
 <style scoped>
-    .scroll{
+    .scroll {
         overflow: hidden;
     }
+
     .chart {
         width: 100%;
         height: 300px;
