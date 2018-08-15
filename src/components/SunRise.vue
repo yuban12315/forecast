@@ -193,6 +193,9 @@
 </script>
 
 <style scoped>
+    div{
+        color: #656565;
+    }
     .sun-body {
         width: 100%;
         height: 200px;
