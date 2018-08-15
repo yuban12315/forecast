@@ -15,7 +15,7 @@ module.exports = {
                 changOrigin: true
             },
             '/testApi': {
-                target: 'https://api.seniverse.com',
+                target: 'http://localhost:8080',
                 ws: true,
                 changOrigin: true
             },
