@@ -25,13 +25,15 @@ Vue.config.productionTip = false
 // 或者，只是一个组件配置对象。
 import MainPage from './components/MainPage'
 import SunRise from './components/SunRise'
+import ThreeWeather from './components/ThreeWeather.vue'
 
 //创建 router 实例，然后传 `routes` 配置
 const router = new VueRouter({
     routes: [
         // 动态路径参数 以冒号开头
         { path: '/', component: MainPage },
-        {path:'/sun',component:SunRise}
+        {path:'/sun',component:SunRise},
+        {path:'/three',component:ThreeWeather}
     ],
     scrollBehavior(to, from, savedPosition) {
         if (savedPosition) {
