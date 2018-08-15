@@ -64,13 +64,18 @@
                 </el-col>
             </el-row>
         </div>
-        <div class="city-add">+</div>
+        <div class="city-add" @click="tos()">+</div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "city-choose"
+        name: "city-choose",
+        methods:{
+            tos(){
+                this.$router.push({path: '/city_s'})
+            }
+        }
     }
 </script>
 
