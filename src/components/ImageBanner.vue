@@ -89,7 +89,7 @@
             }
         },
         async created() {
-            await this.getWeather('nanchong')
+            await this.getWeather('shenyang')
 
         }
     }

@@ -2,7 +2,7 @@
     <el-container class="container">
         <el-main class="nopadding">
             <ImageBanner></ImageBanner>
-            <ThreeWeather></ThreeWeather>
+
             <WeatherChart></WeatherChart>
         </el-main>
     </el-container>
@@ -30,5 +30,8 @@
 <style scoped>
     .container{
         overflow-x: hidden;
+        margin: 0;
+        width: 100%;
+        padding: 0;
     }
 </style>
