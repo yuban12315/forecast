@@ -3,7 +3,7 @@
         <el-row>
             <el-col :xs="{span:18,offset:3}" :sm="{span:18,offset:3}" :md="{span: 12, offset: 6}" :lg="{span: 12, offset: 6}">
                 <div class="banner">
-                    <div class="temperature">{{weatherData.now.temperature}}&#8451;</div>
+                    <div class="temperature">{{weatherData.now.temperature}}°C</div>
                     <div class="city">{{weatherData.location.name}}</div>
                     <div class="weather-text">{{weatherData.now.text}}</div>
                     <div class="visibility">能见度：{{weatherData.now.visibility}}</div>
@@ -16,7 +16,7 @@
 <script>
     /*导入图片*/
     import bg_cloudy from '../assets/ImageBanner/bg_cloudy.jpg'
-    import bg_sunny from '../assets/ImageBanner/bg_sunny_night.jpg'
+    import bg_sunny from '../assets/ImageBanner/bg_sunny.jpg'
     import bg_smog from '../assets/ImageBanner/bg_smog.jpg'
     import bg_foggy from '../assets/ImageBanner/bg_foggy.jpg'
     import bg_snow from '../assets/ImageBanner/bg_snow.jpg'
@@ -89,7 +89,7 @@
             }
         },
         async created() {
-            await this.getWeather('beijing')
+            await this.getWeather('nanchong')
 
         }
     }
