@@ -1,6 +1,6 @@
 <template>
     <el-row>
-        <el-col :span="18" :offset="3" :xs="{span:22,offset:1}" class="scroll">
+        <el-col :xs="{span:22,offset:1}" :sm="{span:18,offset:3}" :md="{span: 12, offset: 6}" :lg="{span: 12, offset: 6}" class="scroll">
             <div class="chart">
                 <div id="myChart" :style="{width: '1500px', height: '300px'}"></div>
             </div>
@@ -81,6 +81,7 @@
                 timeList[timeList.length]=str
                 temperatureList[temperatureList.length]=temp
             }
+            timeList[0]='now'
             this.opt.xAxis[0].data=timeList
             this.opt.series[0].data=temperatureList
             this.opt.yAxis[0].min = min-5

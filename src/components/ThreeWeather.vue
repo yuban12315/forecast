@@ -1,16 +1,20 @@
 <template>
-    <div id="three-body">
-        <table>
-            <tbody>
-            <tr v-for="item in items">
-                <td class="left">{{item.id}}</td>
-                <td class="center">{{item.text_day}}</td>
-                <td class="right">{{item.low_high}}</td>
-            </tr>
+    <el-row class="my-card">
+            <el-col :xs="{span:22,offset:1}" :sm="{span:18,offset:3}" :md="{span: 12, offset: 6}" :lg="{span: 12, offset: 6}" class="scroll">
+                <div id="three-body">
+                    <table>
+                        <tbody>
+                        <tr v-for="item in items">
+                            <td class="left">{{item.id}}</td>
+                            <td class="center">{{item.text_day}}</td>
+                            <td class="right">{{item.low_high}}</td>
+                        </tr>
 
-            </tbody>
-        </table>
-    </div>
+                        </tbody>
+                    </table>
+                </div>
+            </el-col>
+    </el-row>
 
 
 </template>
@@ -83,13 +87,12 @@
     #three-body {
         width: 100%;
         height: 160px;
-        border-bottom: 10px solid #eeeeee;
+
     }
 
     table {
-        width: 84%;
-        margin-left: 8%;
-        margin-bottom: 0;
+        width: 100%;
+        margin-bottom: 20px;
         border-collapse: collapse;
         border-spacing: 0;
     }
@@ -122,5 +125,14 @@
     .right {
         width: 33%;
         text-align: right;
+    }
+
+    .my-card{
+        margin-top: 10px;
+        margin-bottom:10px;
+        box-shadow: 0 2px 12px 0 rgba(0,0,0,.1)
+    }
+    .el-card__body{
+        padding: 0;
     }
 </style>
