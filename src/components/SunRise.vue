@@ -349,7 +349,7 @@
 
     .my-card{
         margin-top: 40px;
-        margin-bottom:40px;
+        /*margin-bottom:60px;*/
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1)
     }
 </style>

@@ -4,6 +4,8 @@
         <el-col :span="24"><ThreeWeather></ThreeWeather></el-col>
         <el-col :span="24"><WeatherChart></WeatherChart></el-col>
         <el-col :span="24"><SunRise></SunRise></el-col>
+
+        <el-col :span="24"><Footer></Footer></el-col>
     </el-row>
 </template>
 <script>
@@ -11,6 +13,7 @@
     import ThreeWeather from './ThreeWeather'
     import WeatherChart from './WeatherChart'
     import SunRise from './SunRise'
+    import Footer from './Footer'
 
     export default {
         name: 'ManageCity',
@@ -18,7 +21,8 @@
             ImageBanner,
             ThreeWeather,
             WeatherChart,
-            SunRise
+            SunRise,
+            Footer
         },
         data() {
             return {

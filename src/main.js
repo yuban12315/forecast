@@ -28,7 +28,8 @@ import MainPage from './components/MainPage'
 import SunRise from './components/SunRise'
 import CityChoose from './components/CityChoose'
 import CitySearch from './components/CitySearch'
-import ThreeWeather from './components/ThreeWeather'
+//import ThreeWeather from './components/ThreeWeather'
+import Test from './components/Footer'
 //创建 router 实例，然后传 `routes` 配置
 const router = new VueRouter({
     routes: [
@@ -37,7 +38,7 @@ const router = new VueRouter({
         {path:'/sun',component:SunRise},
         {path:'/city',component:CityChoose},
         {path:'/city_s',component:CitySearch},
-        {path:'/three',component:ThreeWeather}
+        {path:'/test',component:Test}
     ],
     scrollBehavior(to, from, savedPosition) {
         if (savedPosition) {

@@ -102,6 +102,8 @@
         color: white;
         font-family:  "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
         font-weight: 300;
+        user-select: none;
+        user-focus:none;
 
         /*background: repeat;*/
         /*background-size:400px 300px;*/
