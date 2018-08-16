@@ -178,6 +178,10 @@
         },
         async mounted() {
             this.showTop()
+            /**
+             * 未实现获取当前Main的city
+             * 。。。
+             */
             await this.getWeather('beijing')
         }
     }

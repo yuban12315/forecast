@@ -60,6 +60,10 @@
             }
         },
         async created() {
+            /**
+             * 未实现获取当前Main的city
+             * 。。。
+             */
             await this.getWeather('nanchong')
 
         }

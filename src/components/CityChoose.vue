@@ -81,6 +81,10 @@
         },
 
         async created() {
+            /**
+             * 未实现获取历史城市列表
+             * 。。。
+             */
             var citys = ['beijing', 'shenyang']
             for (var i = 0; i < citys.length; i++) {
                 this.location.push({
