@@ -347,7 +347,7 @@
                  * 未实现选择城市传到Main
                  * 。。。
                  */
-                //this.$router.push({path: '/'})
+                this.$router.push({path: '/'})
             },
             back() {
                 this.$router.back()
