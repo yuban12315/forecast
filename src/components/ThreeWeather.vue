@@ -4,8 +4,8 @@
             <tbody>
             <tr v-for="item in items">
                 <td class="left">{{item.id}}</td>
-                <td class="center">{{item.wea}}</td>
-                <td class="right">{{item.tem}}</td>
+                <td class="center">{{item.text_day}}</td>
+                <td class="right">{{item.low_high}}</td>
             </tr>
 
             </tbody>
@@ -21,17 +21,54 @@
         name: 'hello',
         data() {
             return {
-                item: {'id': '', 'wea': '', 'tem': ''},
                 items: [
-                    {id: "今天", wea: "多云转晴|优", tem: "28|19℃"},
-                    {id: "明天", wea: "晴|优", tem: "27|17℃"},
-                    {id: "后天", wea: "多云转雷阵雨|优", tem: "28|20℃"}
+                    {
+                        id: "今天",
+                        text_day:"",
+                        low_high:""
+                    },
+                    {
+                        id: "明天",
+                        text_day:"",
+                        low_high:""
+                    },{
+                        id: "后天",
+                        text_day:"",
+                        low_high:""
+                    }
                 ]
             }
+        },
+        methods:{
+            async getWeather(city) {
+                const url = `https://api.seniverse.com/v3/weather/daily.json?key=afmlz62jdx69kmph&location=${city}&language=zh-Hans&unit=c&start=0&days=3`
+                const res = await this.$axios.post('/api/url', {url})
+                console.log(res.data.results[0])
+
+                for (var i = 0; i < 3; i++) {
+
+                    this.items[i].text_day = res.data.results[0]['daily'][i]['text_day']
+                    this.items[i].low_high = res.data.results[0]['daily'][i]['low']
+                        + " / "
+                        + res.data.results[0]['daily'][i]['high']+"℃"
+                }
+            }
+        },
+        async created() {
+            await this.getWeather('nanchong')
+
         }
     }
 </script>
 <style scoped>
+    img{
+        width: 200px;
+        height: 200px;
+
+    }
+    #img{
+        text-align: center;
+    }
     #three-body {
         width: 100%;
         height: 200px;
@@ -39,8 +76,8 @@
     }
 
     table {
-        width: 90%;
-        margin-left: 5%;
+        width: 94%;
+        margin-left: 3%;
         margin-bottom: 0;
     }
 
@@ -68,14 +105,16 @@
     }
 
     .left {
-        width: 20%;
+        width: 33%;
+        text-align: left;
     }
 
     .center {
-        width: 50%;
+        width: 33%;
     }
 
     .right {
-        width: 30%;
+        width: 33%;
+        text-align: right;
     }
 </style>
