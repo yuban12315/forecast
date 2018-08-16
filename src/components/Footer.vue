@@ -26,6 +26,11 @@
 
     i {
         font-size: 32px;
+        padding: 5px;
+        transition: 100ms ease-in;
+    }
+    i:hover{
+        font-size: 34px;
     }
     .my-card{
         margin-top: 10px;

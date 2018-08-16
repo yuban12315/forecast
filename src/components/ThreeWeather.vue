@@ -9,7 +9,6 @@
                             <td class="center">{{item.text_day}}</td>
                             <td class="right">{{item.low_high}}</td>
                         </tr>
-
                         </tbody>
                     </table>
                 </div>
@@ -130,6 +129,7 @@
     .my-card{
         margin-top: 10px;
         margin-bottom:10px;
+        padding-bottom: 10px;
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1)
     }
     .el-card__body{
