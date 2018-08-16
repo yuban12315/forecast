@@ -2,7 +2,9 @@
     <div class="city">
         <div class="city-title">
             <el-row>
-                <el-col :span="2" class="title-left"><</el-col>
+                <el-col :span="2" class="title-left">
+                    <div @click="back()"><</div>
+                </el-col>
                 <el-col :span="22" class="title-right">城市选择</el-col>
             </el-row>
         </div>
@@ -19,7 +21,7 @@
                             </el-col>
                             <el-col :span="4">
                                 <div class="ct2">
-                                    <img src="../assets/CityChoose/16.png"/>
+                                    <!--<img src="../assets/CityChoose/16.png"/>-->
                                 </div>
                             </el-col>
                             <el-col :span="6">
@@ -51,6 +53,9 @@
         methods: {
             tos() {
                 this.$router.push({path: '/city_s'})
+            },
+            back() {
+                this.$router.back()
             },
 
             async getWeather1(ind, city) {
