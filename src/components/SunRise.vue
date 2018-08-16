@@ -1,44 +1,45 @@
 <template>
-   <el-row class="my-card">
-       <el-col :xs="{span:22,offset:1}" :sm="{span:18,offset:3}" :md="{span: 12, offset: 6}" :lg="{span: 12, offset: 6}" class="sun-body">
-           <el-row>
-               <el-col class="sun-top" :span="24">
-                   <div class="sun" id="sun">
-                       <canvas id="canvas">A Drawing of something</canvas>
-                   </div>
-               </el-col>
-               <!--:xs="{span:22,offset:1}" :sm="{span:18,offset:3}" :md="{span: 12, offset: 6}" :lg="{span: 12, offset: 6}" -->
-               <el-col   class="sun-bottom">
-                   <el-row :gutter="5">
-                       <el-col :span="6">
-                           <div class="sun-msg">
-                               <div id="fx">{{wind_direction}}</div>
-                               <div id="fj">{{wind_scale}}</div>
-                           </div>
-                       </el-col>
-                       <el-col :span="6">
-                           <div class="sun-msg">
-                               <div>相对湿度</div>
-                               <div id="sd">{{humidity}}</div>
-                           </div>
-                       </el-col>
-                       <el-col :span="6">
-                           <div class="sun-msg">
-                               <div>体感温度</div>
-                               <div id="wd">{{feels_like}}</div>
-                           </div>
-                       </el-col>
-                       <el-col :span="6">
-                           <div class="sun-msg-last">
-                               <div>气压</div>
-                               <div id="qy">{{pressure}}</div>
-                           </div>
-                       </el-col>
-                   </el-row>
-               </el-col>
-           </el-row>
-       </el-col>
-   </el-row>
+    <el-row class="my-card">
+        <el-col :xs="{span:22,offset:1}" :sm="{span:18,offset:3}" :md="{span: 12, offset: 6}"
+                :lg="{span: 12, offset: 6}" class="sun-body">
+            <el-row>
+                <el-col class="sun-top" :span="24">
+                    <div class="sun" id="sun">
+                        <canvas id="canvas">A Drawing of something</canvas>
+                    </div>
+                </el-col>
+                <!--:xs="{span:22,offset:1}" :sm="{span:18,offset:3}" :md="{span: 12, offset: 6}" :lg="{span: 12, offset: 6}" -->
+                <el-col class="sun-bottom">
+                    <el-row :gutter="5">
+                        <el-col :span="6">
+                            <div class="sun-msg">
+                                <div id="fx">{{wind_direction}}</div>
+                                <div id="fj">{{wind_scale}}</div>
+                            </div>
+                        </el-col>
+                        <el-col :span="6">
+                            <div class="sun-msg">
+                                <div>相对湿度</div>
+                                <div id="sd">{{humidity}}</div>
+                            </div>
+                        </el-col>
+                        <el-col :span="6">
+                            <div class="sun-msg">
+                                <div>体感温度</div>
+                                <div id="wd">{{feels_like}}</div>
+                            </div>
+                        </el-col>
+                        <el-col :span="6">
+                            <div class="sun-msg-last">
+                                <div>气压</div>
+                                <div id="qy">{{pressure}}</div>
+                            </div>
+                        </el-col>
+                    </el-row>
+                </el-col>
+            </el-row>
+        </el-col>
+    </el-row>
 </template>
 
 <script>
@@ -55,12 +56,13 @@
     // var day_begin = '日出 06:00'
     // var day_end = '日落 18:00'
 
-    class Draw{
-        constructor(){
+    class Draw {
+        constructor() {
             this.time = 0
         }
+
         canvas() {
-            let t=this.time
+            let t = this.time
             var sun = document.getElementById("sun")
             var canvas = document.getElementById('canvas');
 
@@ -151,11 +153,13 @@
                 context.stroke()
             }
         }
-        setTime(t){
+
+        setTime(t) {
             this.time = t
         }
     }
-    const draw=new Draw()
+
+    const draw = new Draw()
 
     export default {
         name: "SunRise",
@@ -281,7 +285,7 @@
                     var t = (hour - 6) / 12
                     draw.setTime(t)
                     //this.canvas(t)
-                   draw.canvas()
+                    draw.canvas()
                 } else {
                     draw.setTime(1)
                     draw.canvas()
@@ -302,9 +306,12 @@
     //     window.location.reload()
     // }
 
-        window.onresize=()=>{
-        draw.canvas()
+    window.onresize = () => {
+        const str=location.href
+        if (str.charCodeAt(str.length-1)===47){
+            draw.canvas()
         }
+    }
 
 </script>
 
@@ -347,9 +354,9 @@
         height: 100px;
     }
 
-    .my-card{
+    .my-card {
         margin-top: 40px;
         /*margin-bottom:60px;*/
-        box-shadow: 0 2px 12px 0 rgba(0,0,0,.1)
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1)
     }
 </style>
