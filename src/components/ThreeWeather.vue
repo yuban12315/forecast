@@ -86,8 +86,8 @@
         width: 84%;
         margin-left: 8%;
         margin-bottom: 0;
-        border-collapse:collapse;
-        border-spacing:0;
+        border-collapse: collapse;
+        border-spacing: 0;
     }
 
     tr {
@@ -98,11 +98,11 @@
     }
 
     td {
-        padding:0;
+        padding: 0;
         margin: 0;
         height: 50px;
         text-align: center;
-        display:table-cell;
+        display: table-cell;
         vertical-align: middle;
     }
 
