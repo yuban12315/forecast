@@ -157,7 +157,7 @@
 
             async getWeather(city) {
                 const url = `https://api.seniverse.com/v3/weather/now.json?key=afmlz62jdx69kmph&location=${city}&language=zh-Hans&unit=c`
-                const res = await this.$axios.post(`/testApi/url.action`, {url})
+                const res = await this.$axios.post(`/api/url`, {url})
 
                 this.wind_direction = res.data.results[0]['now']['wind_direction']
                 this.wind_scale = res.data.results[0]['now']['wind_scale'] + "级"
