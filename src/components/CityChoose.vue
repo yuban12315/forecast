@@ -7,40 +7,14 @@
             </el-row>
         </div>
         <div class="city-body">
-            <el-row>
+            <el-row v-for="loc in location">
                 <el-col>
                     <el-card class="city-box">
                         <el-row class="ct">
                             <el-col :span="14">
                                 <div class="ct1">
-                                    <div class="ct1-t text-col-1">呼和浩特</div>
-                                    <div class="ct1-b text-col-2">内蒙古自治区</div>
-                                </div>
-                            </el-col>
-                            <el-col :span="4">
-                                <div class="ct2">
-                                    <img src="../assets/CityChoose/16.png"/>
-                                </div>
-                            </el-col>
-                            <el-col :span="6">
-                                <div class="ct3 text-col-1">25<sup class="csup">℃</sup></div>
-                            </el-col>
-                        </el-row>
-                        <el-row class="cb">
-                            <el-col :span="18" class="cb-l text-col-1">空气优 | 湿度62% | 东北风3级</el-col>
-                            <el-col :span="6" class="cb-r text-col-1">27/15℃</el-col>
-                        </el-row>
-                    </el-card>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col>
-                    <el-card class="city-box">
-                        <el-row class="ct">
-                            <el-col :span="14">
-                                <div class="ct1">
-                                    <div class="ct1-t text-col-1">{{this.city}}</div>
-                                    <div class="ct1-b text-col-2">{{this.city_B}}</div>
+                                    <div class="ct1-t text-col-1">{{loc.city}}</div>
+                                    <div class="ct1-b text-col-2">{{loc.city_B}}</div>
                                 </div>
                             </el-col>
                             <el-col :span="4">
@@ -50,13 +24,13 @@
                             </el-col>
                             <el-col :span="6">
                                 <div class="ct3 text-col-1">
-                                    {{this.feels}}<sup class="csup">℃</sup>
+                                    {{loc.feels}}<sup class="csup">℃</sup>
                                 </div>
                             </el-col>
                         </el-row>
                         <el-row class="cb">
-                            <el-col :span="18" class="cb-l text-col-1">{{this.others}}</el-col>
-                            <el-col :span="6" class="cb-r text-col-1">{{this.high2low}}</el-col>
+                            <el-col :span="18" class="cb-l text-col-1">{{loc.others}}</el-col>
+                            <el-col :span="6" class="cb-r text-col-1">{{loc.high2low}}</el-col>
                         </el-row>
                     </el-card>
                 </el-col>
@@ -71,15 +45,7 @@
         name: "city-choose",
         data() {
             return {
-                location:[
-                    {
-                        city: '',
-                        city_B: '',
-                        feels: '',
-                        others: '',
-                        high2low: ''
-                    },
-                ]
+                location: []
             }
         },
         methods: {
@@ -87,28 +53,41 @@
                 this.$router.push({path: '/city_s'})
             },
 
-            async getWeather1(city) {
+            async getWeather1(ind, city) {
                 const url = `https://api.seniverse.com/v3/weather/now.json?key=afmlz62jdx69kmph&location=${city}&language=zh-Hans&unit=c`
                 const res = await this.$axios.post(`/api/url`, {url})
-                this.city = res.data.results[0]['location']['name']
-                this.city_B = res.data.results[0]['location']['path']
-                this.feels = res.data.results[0]['now']['temperature']
-                this.others = res.data.results[0]['now']['text'] + " | 湿度" +
+
+                this.location[ind].city = res.data.results[0]['location']['name']
+                this.location[ind].city_B = res.data.results[0]['location']['path']
+                this.location[ind].feels = res.data.results[0]['now']['temperature']
+                this.location[ind].others = res.data.results[0]['now']['text'] + " | 湿度" +
                     res.data.results[0]['now']['humidity'] + "% | " +
                     res.data.results[0]['now']['wind_direction'] + "风" +
                     res.data.results[0]['now']['wind_scale'] + "级"
             },
 
-            async getWeather2(city) {
+            async getWeather2(ind, city) {
                 const url = `https://api.seniverse.com/v3/weather/daily.json?key=afmlz62jdx69kmph&location=${city}&language=zh-Hans&unit=c&start=0&days=1`
+
                 const res = await this.$axios.post(`/api/url`, {url})
-                this.high2low = res.data.results[0]['daily'][0]['high'] + " / " +
+                this.location[ind].high2low = res.data.results[0]['daily'][0]['high'] + " / " +
                     res.data.results[0]['daily'][0]['low'] + "℃"
             }
         },
-        async mounted() {
-            await this.getWeather1('beijing')
-            await this.getWeather2('beijing')
+
+        async created() {
+            var citys = ['beijing', 'shenyang']
+            for (var i = 0; i < citys.length; i++) {
+                this.location.push({
+                    city: '',
+                    city_B: '',
+                    feels: '',
+                    others: '',
+                    high2low: ''
+                })
+                await this.getWeather1(i, citys[i])
+                await this.getWeather2(i, citys[i])
+            }
         }
     }
 </script>
