@@ -1,6 +1,6 @@
 <template>
     <div id="three-body">
-        <table class="table table-condensed">
+        <table>
             <tbody>
             <tr v-for="item in items">
                 <td class="left">{{item.id}}</td>
@@ -10,7 +10,6 @@
 
             </tbody>
         </table>
-        <p>15天趋势预报</p>
     </div>
 
 
@@ -24,33 +23,39 @@
                 items: [
                     {
                         id: "今天",
-                        text_day:"",
-                        low_high:""
+                        text_day: "",
+                        low_high: ""
                     },
                     {
                         id: "明天",
-                        text_day:"",
-                        low_high:""
-                    },{
+                        text_day: "",
+                        low_high: ""
+                    }, {
                         id: "后天",
-                        text_day:"",
-                        low_high:""
+                        text_day: "",
+                        low_high: ""
                     }
                 ]
             }
         },
-        methods:{
+        methods: {
             async getWeather(city) {
                 const url = `https://api.seniverse.com/v3/weather/daily.json?key=afmlz62jdx69kmph&location=${city}&language=zh-Hans&unit=c&start=0&days=3`
                 const res = await this.$axios.post('/api/url', {url})
                 console.log(res.data.results[0])
 
                 for (var i = 0; i < 3; i++) {
-
-                    this.items[i].text_day = res.data.results[0]['daily'][i]['text_day']
+                    var wea1 = res.data.results[0]['daily'][i]['text_day']
+                    var wea2 = res.data.results[0]['daily'][i]['text_night']
+                    if (wea1 == wea2) {
+                        this.items[i].text_day = wea1
+                    }
+                    else {
+                        this.items[i].text_day = wea1 + "转" + wea2
+                    }
                     this.items[i].low_high = res.data.results[0]['daily'][i]['low']
                         + " / "
-                        + res.data.results[0]['daily'][i]['high']+"℃"
+                        + res.data.results[0]['daily'][i]['high'] + "℃"
                 }
             }
         },
@@ -61,47 +66,44 @@
     }
 </script>
 <style scoped>
-    img{
+    img {
         width: 200px;
-        height: 200px;
+        height: 150px;
 
     }
-    #img{
+
+    #img {
         text-align: center;
     }
+
     #three-body {
         width: 100%;
-        height: 200px;
+        height: 160px;
         border-bottom: 10px solid #eeeeee;
     }
 
     table {
-        width: 94%;
-        margin-left: 3%;
+        width: 84%;
+        margin-left: 8%;
         margin-bottom: 0;
+        border-collapse:collapse;
+        border-spacing:0;
     }
 
     tr {
-        height: 46px;
-        font-size: 1.3em;
+        padding: 0;
+        height: 50px;
+        font-size: 1em;
+        border-bottom: solid 1px gainsboro;
     }
 
     td {
-        padding: 0;
+        padding:0;
         margin: 0;
-        height: 46px;
+        height: 50px;
         text-align: center;
-        vertical-align: bottom;
-    }
-
-    p {
-        margin: 0;
-        padding-top: 15px;
-        width: 100%;
-        border-top: 1px solid gainsboro;
-        text-align: center;
-        font-size: 1em;
-        vertical-align: bottom;
+        display:table-cell;
+        vertical-align: middle;
     }
 
     .left {
