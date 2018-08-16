@@ -1,12 +1,10 @@
 <template>
-    <el-container class="container">
-        <el-main class="nopadding">
-            <ImageBanner></ImageBanner>
-            <ThreeWeather></ThreeWeather>
-            <WeatherChart></WeatherChart>
-            <SunRise></SunRise>
-        </el-main>
-    </el-container>
+    <el-row>
+        <el-col :span="24"><ImageBanner></ImageBanner></el-col>
+        <el-col :span="24"><ThreeWeather></ThreeWeather></el-col>
+        <el-col :span="24"><WeatherChart></WeatherChart></el-col>
+        <el-col :span="24"><SunRise></SunRise></el-col>
+    </el-row>
 </template>
 <script>
     import ImageBanner from './ImageBanner'
@@ -36,5 +34,8 @@
         margin: 0;
         width: 100%;
         padding: 0;
+    }
+    el-main{
+        overflow: hidden;
     }
 </style>
