@@ -86,6 +86,9 @@
                 console.log(res.data.results[0])
                 this.weatherData=res.data.results[0]
                 this.setWeather(this.weatherData)
+            },
+            async getAQI(city){
+
             }
         },
         async created() {

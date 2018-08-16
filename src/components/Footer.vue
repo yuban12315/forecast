@@ -5,13 +5,18 @@
                     <img src="https://static.sencdn.com/brand/logo/logo-red.svg?20180201" style="width:50px; height:50px;" alt="心知天气" class="logo white">气象数据来自 心知天气
                 </div>
             </el-col>
-            <el-col class="bottom  my-card"><i class="el-icon-menu"></i></el-col>
+            <el-col class="bottom  my-card"><i class="el-icon-menu" v-on:click="toCity"></i></el-col>
         </el-row>
 </template>
 
 <script>
     export default {
-        name: "Footer"
+        name: "Footer",
+        methods:{
+            toCity(){
+                this.$router.push({path:'/city'})
+            }
+        }
     }
 </script>
 
@@ -28,9 +33,7 @@
         font-size: 32px;
         padding: 5px;
         transition: 100ms ease-in;
-    }
-    i:hover{
-        font-size: 34px;
+        cursor: pointer;
     }
     .my-card{
         margin-top: 10px;
