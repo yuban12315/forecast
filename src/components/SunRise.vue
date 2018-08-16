@@ -197,7 +197,9 @@
         width: 100%;
         height: 200px;
         border-top: 10px solid #eeeeee;
-        border-bottom: 10px solid #eeeeee;
+        /*border-bottom: 10px solid #eeeeee;*/
+        overflow-y: hidden;
+        overflow-x: hidden;
     }
 
     .sun-top {
