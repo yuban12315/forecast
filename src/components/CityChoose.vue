@@ -12,7 +12,7 @@
 
             </el-col>
         </el-col>
-        <el-col :xs="{span:22,offset:22}" :sm="{span:18,offset:3}" :md="{span: 12, offset: 6}"
+        <el-col :xs="{span:22,offset:1}" :sm="{span:18,offset:3}" :md="{span: 12, offset: 6}"
                 :lg="{span: 12, offset: 6}" style="text-align: center">
             <div class="city-body">
 
@@ -74,6 +74,8 @@
             },
             choose(index) {
                 console.log(this.location[index])
+                this.$localStorage.set('chosen', this.location[index].city)
+                this.$router.push({path: '/'})
             },
 
             async getWeather(cnt, citys) {
@@ -220,7 +222,7 @@
         width: 50px;
         height: 50px;
         /*left: 85%;*/
-        left: 47.5%;
+        left: 47%;
         position: fixed;
         bottom: 50px;
         background-color: #45D7D4;

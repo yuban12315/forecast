@@ -46,7 +46,7 @@
                  * 语音播报城市
                  * @type {string}
                  */
-                var city = 'beijing'
+                const city=this.$localStorage.get('chosen')
                 const res = await this.$axios.post(`/testApi/audio`, {city})
                 vid.src = res.data
                 vid.load()
