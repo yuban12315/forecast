@@ -1,20 +1,53 @@
 <template>
-        <el-row>
-            <el-col>
-                <div class="footer">
-                    <img src="https://static.sencdn.com/brand/logo/logo-red.svg?20180201" style="width:50px; height:50px;" alt="心知天气" class="logo white">气象数据来自 心知天气
-                </div>
-            </el-col>
-            <el-col class="bottom  my-card"><i class="el-icon-menu" v-on:click="toCity"></i></el-col>
-        </el-row>
+    <el-row>
+        <el-col>
+            <div class="footer">
+                <img src="https://static.sencdn.com/brand/logo/logo-red.svg?20180201" style="width:50px; height:50px;"
+                     alt="心知天气" class="logo white">气象数据来自 心知天气
+            </div>
+        </el-col>
+        <el-col class="bottom  my-card">
+            <i class="el-icon-menu" v-on:click="toCity"></i>
+            <i class="el-icon-phone" :class="audio" v-on:click="getAudio()" id="aud"></i>
+        </el-col>
+        <audio id="vid" class="bottom" autoplay loop>
+        </audio>
+    </el-row>
 </template>
 
 <script>
     export default {
         name: "Footer",
-        methods:{
-            toCity(){
-                this.$router.push({path:'/city'})
+        data(){
+            return{
+                audio:''
+            }
+        },
+        methods: {
+            toCity() {
+                this.$router.push({path: '/city'})
+            },
+
+            async getAudio() {
+                var vid = document.getElementById('vid')
+                if(!vid.paused){
+                    this.audio = 'el-icon-phone'
+                    vid.pause()
+                    return
+                }
+
+                /**
+                 * 语音播报城市
+                 * @type {string}
+                 */
+                var city = 'beijing'
+
+                const url = `${city}`
+                const res = await this.$axios.post(`/testApi/audio`, {url})
+                vid.src = res.data
+                vid.load()
+                vid.play()
+                this.audio = 'el-icon-phone-outline'
             }
         }
     }
@@ -26,7 +59,7 @@
         padding: 50px;
         font-size: 20px;
         margin-bottom: 20px;
-        background-color: rgba(167,147,168,0.21);
+        background-color: rgba(167, 147, 168, 0.21);
     }
 
     i {
@@ -35,17 +68,23 @@
         transition: 100ms ease-in;
         cursor: pointer;
     }
-    .my-card{
+
+    .my-card {
         margin-top: 10px;
         background-color: white;
-        box-shadow: 0 2px 12px 0 rgba(0,0,0,.1)
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1)
     }
 
-    .bottom{
+    .bottom {
         position: fixed;
         bottom: 0;
     }
-    img{
+
+    img {
         margin-right: 10px;
+    }
+
+    #aud{
+        float: right;
     }
 </style>

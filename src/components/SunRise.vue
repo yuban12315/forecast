@@ -157,6 +157,11 @@
         setTime(t) {
             this.time = t
         }
+
+        setBeginEnd(b, e) {
+            this.day_begin = b
+            this.day_end = e
+        }
     }
 
     const draw = new Draw()
@@ -280,6 +285,11 @@
             },
 
             showTop() {
+                /**
+                 * 设置日出日落时间
+                 */
+                draw.setBeginEnd(this.day_begin, this.day_end)
+
                 var hour = new Date().getHours();
                 if (hour >= 6 && hour <= 18) {
                     var t = (hour - 6) / 12
@@ -307,8 +317,8 @@
     // }
 
     window.onresize = () => {
-        const str=location.href
-        if (str.charCodeAt(str.length-1)===47){
+        const str = location.href
+        if (str.charCodeAt(str.length - 1) === 47) {
             draw.canvas()
         }
     }
