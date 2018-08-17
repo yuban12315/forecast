@@ -1,6 +1,6 @@
 <template>
-    <div class="background" v-bind:style="{backgroundImage:`url(${this.image})`}">
-        <el-row>
+    <div class="background"  v-bind:style="{backgroundImage:`url(${this.image})`}">
+            <el-row>
             <el-col :xs="{span:22,offset:1}" :sm="{span:18,offset:3}" :md="{span: 12, offset: 6}" :lg="{span: 12, offset: 6}">
                 <div class="banner">
                     <div class="temperature">{{weatherData.now.temperature}}°C</div>

@@ -1,57 +1,10 @@
 <template>
-    <div id="myChart" :style="{width: '1500px', height: '300px'}"></div>
+    <div>{{msg}}</div>
 </template>
 
 <script>
 
-    const option = {
-        legend: {
-            data: ['最高气温']
-            ,selectedMode:false,
-        },
-        calculable: false,
-        grid: {
-            x: 20, y: 0, x2: 20, y2: 0
-        },
-        xAxis: [
-            {
-                splitLine: {
-                    show: false
-                },
-                axisTick: {
-                    show: false
-                },
-                type: 'category',
-                boundaryGap: false,
-                data: ['1', '2', '3', '4','1', '2', '3', '4','1', '2', '3', '4','1', '2', '3', '4','1', '2', '3', '4','1', '2', '3', '4',]
-            }
-        ],
-        yAxis: [
-            {
-                min:5,
-                show: false,
-                scale: true,
-                type: 'value',
-                axisLabel: {
-                    formatter: '{value} °C'
-                }
-            }
-        ],
-        series: [
-            {
-                itemStyle: {
-                    normal: {
-                        label: {show: true, formatter: '{c}°C'},
-                        borderWidth:6
-                    }
-                },
-                name: '最高气温',
-                type: 'line',
-                data: [11, 11, 15, 13, 11, 11, 15, 13, 11, 11, 15, 13, 11, 11, 15, 13, 11, 11, 15, 13, 11, 11, 15, 13,],
-            }
-        ]
-    };
-
+    import {string2arr,arr2string} from '../assets/util'
 
     export default {
         name: 'hello',
@@ -61,15 +14,17 @@
             }
         },
         mounted() {
-            this.drawLine();
+            //this.$localStorage.set('name','test msg')
+            //this.msg=this.$localStorage.get('name')
+            //this.msg=this.storage.get('name')
         },
         methods: {
-            drawLine() {
-                // 基于准备好的dom，初始化echarts实例
-                let myChart = this.$echarts.init(document.getElementById('myChart'), 'macarons')
-                // 绘制图表
-                myChart.setOption(option);
-            }
+
+        },
+        created(){
+            let data=string2arr(this.$localStorage.get('cityName'))
+
+            this.msg=data
         }
     }
 </script>

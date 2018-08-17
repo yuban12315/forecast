@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import ElementUI from 'element-ui';
 import axios from 'axios'
 import echarts from 'echarts'
+import VueLocalStorage from 'vue-localstorage'
 
 
 import 'element-ui/lib/theme-chalk/index.css'
@@ -14,9 +15,11 @@ import 'echarts/theme/macarons'
 //安装额外功能
 Vue.use(ElementUI)
 Vue.use(VueRouter)
+Vue.use(VueLocalStorage)
 axios.defaults.withCredentials = true;
 Vue.prototype.$axios = axios;
 Vue.prototype.$echarts=echarts
+//Vue.prototype.$localStorage=VueLocalStorage
 
 Vue.config.productionTip = false
 
@@ -29,7 +32,8 @@ import SunRise from './components/SunRise'
 import CityChoose from './components/CityChoose'
 import CitySearch from './components/CitySearch'
 //import ThreeWeather from './components/ThreeWeather'
-import Test from './components/Footer'
+import Test from './components/Test'
+
 //创建 router 实例，然后传 `routes` 配置
 const router = new VueRouter({
     routes: [
@@ -48,6 +52,11 @@ const router = new VueRouter({
         }
     }
 })
+
+
+//设置默认显示城市，北京
+Vue.localStorage.set('cityName', `["北京"]`)
+Vue.localStorage.set('chosen', '北京')
 
 new Vue({
     router
