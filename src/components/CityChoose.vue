@@ -56,6 +56,8 @@
 </template>
 
 <script>
+
+    import {string2arr} from'../assets/util'
     export default {
         name: "city-choose",
         data() {
@@ -100,7 +102,9 @@
              * 未实现获取历史城市列表
              * 。。。
              */
-            const citys = ['beijing', 'shenyang']
+
+            const citys = string2arr(this.$localStorage.get('cityName'))
+            console.log(citys)
             await this.getWeather(citys.length, citys)
         }
     }
