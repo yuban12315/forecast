@@ -11,22 +11,22 @@
                     <el-button @click="back()">返回</el-button>
                 </el-col>
                 <el-col :span="5" style="margin-top: 5px">
-                    <el-button @click="city4main('北京')">北京</el-button>
+                    <el-button @click="city4main('beijing')">北京</el-button>
                 </el-col>
                 <el-col :span="5" style="margin-top: 5px">
-                    <el-button @click="city4main('上海')">上海</el-button>
+                    <el-button @click="city4main('shanghai')">上海</el-button>
                 </el-col>
                 <el-col :span="5" style="margin-top: 5px">
-                    <el-button @click="city4main('广州')">广州</el-button>
+                    <el-button @click="city4main('guangzhou')">广州</el-button>
                 </el-col>
                 <el-col :span="5" style="margin-top: 5px">
-                    <el-button @click="city4main('深圳')">深圳</el-button>
+                    <el-button @click="city4main('shenzhen')">深圳</el-button>
                 </el-col>
                 <el-col :span="5" style="margin-top: 5px">
-                    <el-button @click="city4main('重庆')">重庆</el-button>
+                    <el-button @click="city4main('chongqing')">重庆</el-button>
                 </el-col>
                 <el-col :span="5" style="margin-top: 5px">
-                    <el-button @click="city4main('呼和浩特')">呼和浩特</el-button>
+                    <el-button @click="city4main('huhehaote')">呼和浩特</el-button>
                 </el-col>
             </el-row>
         </div>
@@ -330,24 +330,24 @@
         },
         methods: {
             city4main(city) {
-                for (name in this.citys) {
-                    if (this.citys[name] == city) {
-                        city = name.toLowerCase();
-                        /**
-                         * 未实现选择城市传到Main
-                         * 。。。
-                         */
-                        this.$router.push({path: '/'})
+                for (const name in this.citys) {
+                    if (this.citys[name] === city) {
+                        city = name
                         break;
                     }
                 }
-
-                this.$message({
-                    showClose: true,
-                    message: '城市错误！！！',
-                    type: 'error'
-                });
-
+                if (city[0] >= 'z' || city[0] <= 'a') {
+                    this.$message({
+                        showClose: true,
+                        message: '城市错误！！！',
+                        type: 'error'
+                    });
+                }
+                /**
+                 * 未实现选择城市传到Main
+                 * 。。。
+                 */
+                this.$router.push({path: '/'})
             },
             back() {
                 this.$router.back()
