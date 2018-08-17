@@ -12,7 +12,7 @@
         methods: {
             async getAudio(city) {
                 const url = `${city}`
-                const res = await this.$axios.post(`/testApi/audio.action`, {url})
+                const res = await this.$axios.post(`/testApi/audio`, {url})
                 console.log(res.data)
 
                 var vid = document.getElementById('vid')

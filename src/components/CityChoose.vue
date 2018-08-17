@@ -3,41 +3,41 @@
         <div class="city-title">
             <el-row>
                 <el-col :span="2" class="title-left">
-                    <div v-on:click="back()"> <i class="el-icon-arrow-left"></i> </div>
+                    <div v-on:click="back()"><i class="el-icon-arrow-left"></i></div>
                 </el-col>
                 <el-col :span="22" class="title-right">城市选择</el-col>
             </el-row>
         </div>
         <div class="city-body">
             <el-row v-for="loc in location" :key="loc.id">
-               <div v-on:click="choose(loc.id)">
-                   <el-col :span="24"  >
-                       <el-card class="city-box">
-                           <el-row class="ct">
-                               <el-col :span="14">
-                                   <div class="ct1">
-                                       <div class="ct1-t text-col-1">{{loc.city}}</div>
-                                       <div class="ct1-b text-col-2">{{loc.city_B}}</div>
-                                   </div>
-                               </el-col>
-                               <el-col :span="4">
-                                   <div class="ct2">
-                                       <!--<img src="../assets/CityChoose/16.png"/>-->
-                                   </div>
-                               </el-col>
-                               <el-col :span="6">
-                                   <div class="ct3 text-col-1">
-                                       {{loc.feels}}<sup class="csup">℃</sup>
-                                   </div>
-                               </el-col>
-                           </el-row>
-                           <el-row class="cb">
-                               <el-col :span="18" class="cb-l text-col-1">{{loc.others}}</el-col>
-                               <el-col :span="6" class="cb-r text-col-1">{{loc.high2low}}</el-col>
-                           </el-row>
-                       </el-card>
-                   </el-col>
-               </div>
+                <div v-on:click="choose(loc.id)">
+                    <el-col :span="24">
+                        <el-card class="city-box">
+                            <el-row class="ct">
+                                <el-col :span="14">
+                                    <div class="ct1">
+                                        <div class="ct1-t text-col-1">{{loc.city}}</div>
+                                        <div class="ct1-b text-col-2">{{loc.city_B}}</div>
+                                    </div>
+                                </el-col>
+                                <el-col :span="4">
+                                    <div class="ct2">
+                                        <!--<img src="../assets/CityChoose/16.png"/>-->
+                                    </div>
+                                </el-col>
+                                <el-col :span="6">
+                                    <div class="ct3 text-col-1">
+                                        {{loc.feels}}<sup class="csup">℃</sup>
+                                    </div>
+                                </el-col>
+                            </el-row>
+                            <el-row class="cb">
+                                <el-col :span="18" class="cb-l text-col-1">{{loc.others}}</el-col>
+                                <el-col :span="6" class="cb-r text-col-1">{{loc.high2low}}</el-col>
+                            </el-row>
+                        </el-card>
+                    </el-col>
+                </div>
             </el-row>
         </div>
         <div class="city-add" @click="tos()">+</div>
@@ -59,29 +59,28 @@
             back() {
                 this.$router.back()
             },
-            choose(index){
+            choose(index) {
                 console.log(this.location[index])
             },
 
-            async getWeather1(ind, city) {
-                const url = `https://api.seniverse.com/v3/weather/now.json?key=afmlz62jdx69kmph&location=${city}&language=zh-Hans&unit=c`
-                const res = await this.$axios.post(`/api/url`, {url})
-
-                this.location[ind].city = res.data.results[0]['location']['name']
-                this.location[ind].city_B = res.data.results[0]['location']['path']
-                this.location[ind].feels = res.data.results[0]['now']['temperature']
-                this.location[ind].others = res.data.results[0]['now']['text'] + " | 湿度" +
-                    res.data.results[0]['now']['humidity'] + "% | " +
-                    res.data.results[0]['now']['wind_direction'] + "风" +
-                    res.data.results[0]['now']['wind_scale'] + "级"
-            },
-
-            async getWeather2(ind, city) {
-                const url = `https://api.seniverse.com/v3/weather/daily.json?key=afmlz62jdx69kmph&location=${city}&language=zh-Hans&unit=c&start=0&days=1`
-
-                const res = await this.$axios.post(`/api/url`, {url})
-                this.location[ind].high2low = res.data.results[0]['daily'][0]['high'] + " / " +
-                    res.data.results[0]['daily'][0]['low'] + "℃"
+            async getWeather(cnt, citys) {
+                const city = `${citys}`
+                const res = await this.$axios.post(`/testApi/choose`, {city})
+                for (var ind = 0; ind < cnt; ind++) {
+                    this.location.push({
+                        city: '',
+                        city_B: '',
+                        feels: '',
+                        others: '',
+                        high2low: '',
+                        id: ind
+                    })
+                    this.location[ind].city = res.data.city_s[ind]['name']
+                    this.location[ind].city_B = res.data.city_s[ind]['path']
+                    this.location[ind].feels = res.data.city_s[ind]['temperature']
+                    this.location[ind].others = res.data.city_s[ind]['others']
+                    this.location[ind].high2low = res.data.city_s[ind]['high2low']
+                }
             }
         },
 
@@ -91,18 +90,7 @@
              * 。。。
              */
             const citys = ['beijing', 'shenyang']
-            for (let i = 0; i < citys.length; i++) {
-                this.location.push({
-                    city: '',
-                    city_B: '',
-                    feels: '',
-                    others: '',
-                    high2low: '',
-                    id:i
-                })
-                await this.getWeather1(i, citys[i])
-                await this.getWeather2(i, citys[i])
-            }
+            await this.getWeather(citys.length, citys)
         }
     }
 </script>
