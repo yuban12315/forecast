@@ -1,47 +1,58 @@
 <template>
-    <div class="city">
-        <div class="city-title">
-            <el-row>
-                <el-col :span="2" class="title-left">
-                    <div v-on:click="back()"><i class="el-icon-arrow-left"></i></div>
-                </el-col>
-                <el-col :span="22" class="title-right">城市选择</el-col>
-            </el-row>
-        </div>
-        <div class="city-body">
-            <el-row v-for="loc in location" :key="loc.id">
-                <div v-on:click="choose(loc.id)">
-                    <el-col :span="24">
-                        <el-card class="city-box">
-                            <el-row class="ct">
-                                <el-col :span="14">
-                                    <div class="ct1">
-                                        <div class="ct1-t text-col-1">{{loc.city}}</div>
-                                        <div class="ct1-b text-col-2">{{loc.city_B}}</div>
-                                    </div>
-                                </el-col>
-                                <el-col :span="4">
-                                    <div class="ct2">
-                                        <!--<img src="../assets/CityChoose/16.png"/>-->
-                                    </div>
-                                </el-col>
-                                <el-col :span="6">
-                                    <div class="ct3 text-col-1">
-                                        {{loc.feels}}<sup class="csup">℃</sup>
-                                    </div>
-                                </el-col>
-                            </el-row>
-                            <el-row class="cb">
-                                <el-col :span="18" class="cb-l text-col-1">{{loc.others}}</el-col>
-                                <el-col :span="6" class="cb-r text-col-1">{{loc.high2low}}</el-col>
-                            </el-row>
-                        </el-card>
+    <el-row>
+        <el-col class="city-title">
+            <el-col :xs="{span:22,offset:1}" :sm="{span:18,offset:3}" :md="{span: 12, offset: 6}"
+                    :lg="{span: 12, offset: 6}">
+                <el-row>
+                    <el-col :span="2" class="title-left">
+                        <div v-on:click="back()"><i class="el-icon-arrow-left"></i></div>
                     </el-col>
-                </div>
-            </el-row>
-        </div>
-        <div class="city-add" @click="tos()">+</div>
-    </div>
+                    <el-col :span="22" class="title-right">城市选择</el-col>
+                </el-row>
+
+            </el-col>
+        </el-col>
+        <el-col :xs="{span:22,offset:22}" :sm="{span:18,offset:3}" :md="{span: 12, offset: 6}"
+                :lg="{span: 12, offset: 6}" style="text-align: center">
+            <div class="city-body">
+
+                <el-row v-for="loc in location" :key="loc.id">
+                    <div v-on:click="choose(loc.id)">
+                        <el-col :span="24">
+                            <el-card class="city-box">
+                                <el-row class="ct">
+                                    <el-col :span="14">
+                                        <div class="ct1">
+                                            <div class="ct1-t text-col-1">{{loc.city}}</div>
+                                            <div class="ct1-b text-col-2">{{loc.city_B}}</div>
+                                        </div>
+                                    </el-col>
+                                    <el-col :span="4">
+                                        <div class="ct2">
+                                            <!--<img src="../assets/CityChoose/16.png"/>-->
+                                        </div>
+                                    </el-col>
+                                    <el-col :span="6">
+                                        <div class="ct3 text-col-1">
+                                            {{loc.feels}}<sup class="csup">℃</sup>
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                                <el-row class="cb">
+                                    <el-col :span="18" class="cb-l text-col-1">{{loc.others}}</el-col>
+                                    <el-col :span="6" class="cb-r text-col-1">{{loc.high2low}}</el-col>
+                                </el-row>
+                            </el-card>
+                        </el-col>
+                    </div>
+                </el-row>
+            </div>
+            <div class="city-add" @click="tos()">+</div>
+
+        </el-col>
+
+    </el-row>
+
 </template>
 
 <script>
@@ -110,20 +121,20 @@
 
     .city-title {
         width: 100%;
-        height: 50px;
-        background-color: #7ebfff;
+        height: 63px;
+        background-color: #45D7D4;
     }
 
     .title-left {
         font-size: 20px;
         cursor: pointer;
         text-align: center;
-        line-height: 50px;
+        line-height: 63px;
         color: #ffffff;
     }
 
     .title-right {
-        line-height: 50px;
+        line-height: 63px;
         color: #ffffff;
     }
 
@@ -204,11 +215,11 @@
     .city-add {
         width: 50px;
         height: 50px;
-        position: absolute;
-        top: 90%;
         /*left: 85%;*/
-        right: 5%;
-        background-color: #7ebfff;
+        left: 47.5%;
+        position: fixed;
+        bottom: 50px;
+        background-color: #45D7D4;
         border-radius: 25px;
         text-align: center;
         line-height: 50px;
