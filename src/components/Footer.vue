@@ -3,12 +3,18 @@
         <el-col>
             <div class="footer">
                 <img src="https://static.sencdn.com/brand/logo/logo-red.svg?20180201" style="width:50px; height:50px;"
-                     alt="心知天气" class="logo white">气象数据来自 心知天气
+                     alt="心知天气" class="logo white">
+                <br>
+                气象数据来自 心知天气
             </div>
         </el-col>
         <el-col class="bottom  my-card">
-            <i class="el-icon-menu" v-on:click="toCity"></i>
-            <i class="el-icon-phone" :class="audio" v-on:click="getAudio()" id="aud"></i>
+           <el-row>
+               <el-col :xs="{span:22,offset:1}" :sm="{span:18,offset:3}" :md="{span: 12, offset: 6}" :lg="{span: 12, offset: 6}">
+                   <i class="el-icon-menu" v-on:click="toCity"></i>
+                   <i class="el-icon-phone" :class="audio" v-on:click="getAudio()" id="aud"></i>
+               </el-col>
+           </el-row>
         </el-col>
         <audio id="vid" class="bottom" autoplay loop>
         </audio>
@@ -54,9 +60,10 @@
 <style scoped>
     .footer {
         text-align: center;
-        padding: 50px;
+        vertical-align: middle;
+        padding: 50px 50px 80px;
         font-size: 20px;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         background-color: rgba(167, 147, 168, 0.21);
     }
 

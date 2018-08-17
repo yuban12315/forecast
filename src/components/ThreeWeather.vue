@@ -43,7 +43,7 @@
         },
         methods: {
             async getWeather(city) {
-                const url = `https://api.seniverse.com/v3/weather/daily.json?key=afmlz62jdx69kmph&location=${city}&language=zh-Hans&unit=c&start=0&days=3`
+                const url = `https://api.seniverse.com/v3/weather/daily.json?key=afmlz62jdx69kmph&location=${encodeURIComponent(city)}&language=zh-Hans&unit=c&start=0&days=3`
                 const res = await this.$axios.post('/api/url', {url})
                 //console.log(res.data.results[0])
 
@@ -63,11 +63,8 @@
             }
         },
         async created() {
-            /**
-             * 未实现获取当前Main的city
-             * 。。。
-             */
-            await this.getWeather('nanchong')
+            const city=this.$localStorage.get('chosen')
+            await this.getWeather(city)
 
         }
     }

@@ -274,7 +274,7 @@
             },
 
             async getWeather(city) {
-                const url = `https://api.seniverse.com/v3/weather/now.json?key=afmlz62jdx69kmph&location=${city}&language=zh-Hans&unit=c`
+                const url = `https://api.seniverse.com/v3/weather/now.json?key=afmlz62jdx69kmph&location=${encodeURIComponent(city)}&language=zh-Hans&unit=c`
                 const res = await this.$axios.post(`/api/url`, {url})
 
                 this.wind_direction = res.data.results[0]['now']['wind_direction'] + "风"
@@ -304,11 +304,8 @@
         },
         async mounted() {
             this.showTop()
-            /**
-             * 未实现获取当前Main的city
-             * 。。。
-             */
-            await this.getWeather('beijing')
+            const city=this.$localStorage.get('chosen')
+            await this.getWeather(city)
         }
     }
 
