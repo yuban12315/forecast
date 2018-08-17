@@ -62,12 +62,13 @@
         }
 
         canvas() {
+            let aut = 2
             let t = this.time
             let sun = document.getElementById("sun")
             let canvas = document.getElementById('canvas');
 
-            let w = sun.clientWidth
-            let h = 100
+            let w = sun.clientWidth * aut
+            let h = 100 * aut
             canvas.width = w;
             canvas.height = h;
 
@@ -76,8 +77,9 @@
             /**
              * 轨迹
              */
+            context.lineCap = 'round';
             context.strokeStyle = '#ff7411';
-            context.lineWidth = 1;
+            context.lineWidth = 2 * aut;
             context.moveTo(0, h);
             context.quadraticCurveTo(w / 2, -h / 2, w, h)
             context.stroke();
@@ -85,17 +87,17 @@
             /**
              * 端点
              */
-            context.beginPath();
-            context.arc(0 + 3, h - 2, 2, 0, 2 * Math.PI);
-            context.fillStyle = '#ff1311'
-            context.fill()
-            context.stroke()
-
-            context.beginPath();
-            context.arc(w - 3, h - 2, 2, 0, 2 * Math.PI);
-            context.fillStyle = '#ff1311'
-            context.fill()
-            context.stroke()
+            // context.beginPath();
+            // context.arc(0 + 3, h - 2, 2, 0, 2 * Math.PI);
+            // context.fillStyle = '#ff1311'
+            // context.fill()
+            // context.stroke()
+            //
+            // context.beginPath();
+            // context.arc(w - 3, h - 2, 2, 0, 2 * Math.PI);
+            // context.fillStyle = '#ff1311'
+            // context.fill()
+            // context.stroke()
 
             /**
              * 画太阳
@@ -106,34 +108,29 @@
             sun_y = (1 - t) * (1 - t) * h + 2 * t * (1 - t) * (-h / 2) + t * t * h
 
             context.beginPath();
-            context.arc(sun_x, sun_y, 15, 0, 2 * Math.PI);
+            context.arc(sun_x, sun_y, 15 * aut, 0, 2 * Math.PI * aut);
             context.strokeStyle = '#ffffff';
             context.fillStyle = '#fff40c'
             context.fill()
-            context.lineWidth = 2;
+            context.lineWidth = 2 * aut;
             context.stroke()
             //分割线
             context.beginPath();
             context.strokeStyle = '#ffcc89';
-            context.lineWidth = 1;
-            context.moveTo(sun_x, sun_y + 17);
-            context.lineTo(sun_x, h - 10)
+            context.lineWidth = 1 * aut;
+            context.moveTo(sun_x, sun_y + 17 * aut);
+            context.lineTo(sun_x, h - 10 * aut)
             context.stroke()
 
             /**
              * 时间
              */
-            context.beginPath();
+            //context.beginPath();
             context.fillStyle = '#ff7411';
-            context.lineWidth = 1;
-            context.font = '10px'
-            context.fillText(this.day_begin, 20, h - 3);
-
-            context.beginPath();
-            context.fillStyle = '#ff7411';
-            context.lineWidth = 1;
-            context.font = '10px'
-            context.fillText(this.day_end, w - 70, h - 3);
+            //context.lineWidth = 10;
+            context.font = 'bold 20px sans-serif'
+            context.fillText(this.day_begin, 30, h - 3);
+            context.fillText(this.day_end, w - 130, h - 3);
 
             /**
              * 画虚线
@@ -304,7 +301,7 @@
         },
         async mounted() {
             this.showTop()
-            const city=this.$localStorage.get('chosen')
+            const city = this.$localStorage.get('chosen')
             await this.getWeather(city)
         }
     }
@@ -365,5 +362,9 @@
         margin-top: 40px;
         /*margin-bottom:60px;*/
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1)
+    }
+
+    #canvas {
+        height: 100px;
     }
 </style>
