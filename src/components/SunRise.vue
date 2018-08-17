@@ -44,17 +44,17 @@
 
 <script>
     // 风力等级
-    // var wind_direction
-    // var wind_scale
+    // let wind_direction
+    // let wind_scale
     // 相对湿度
-    // var humidity
+    // let humidity
     // 体感温度
-    // var feels_like
+    // let feels_like
     // 气压
-    // var pressure
+    // let pressure
 
-    // var day_begin = '日出 06:00'
-    // var day_end = '日落 18:00'
+    // let day_begin = '日出 06:00'
+    // let day_end = '日落 18:00'
 
     class Draw {
         constructor() {
@@ -63,15 +63,15 @@
 
         canvas() {
             let t = this.time
-            var sun = document.getElementById("sun")
-            var canvas = document.getElementById('canvas');
+            let sun = document.getElementById("sun")
+            let canvas = document.getElementById('canvas');
 
-            var w = sun.clientWidth
-            var h = 100
+            let w = sun.clientWidth
+            let h = 100
             canvas.width = w;
             canvas.height = h;
 
-            var context = canvas.getContext('2d');
+            let context = canvas.getContext('2d');
 
             /**
              * 轨迹
@@ -100,8 +100,8 @@
             /**
              * 画太阳
              */
-            var sun_x
-            var sun_y
+            let sun_x
+            let sun_y
             sun_x = (1 - t) * (1 - t) * 0 + 2 * t * (1 - t) * w / 2 + t * t * w
             sun_y = (1 - t) * (1 - t) * h + 2 * t * (1 - t) * (-h / 2) + t * t * h
 
@@ -182,15 +182,15 @@
         },
         methods: {
             canvas(t) {
-                var sun = document.getElementById("sun")
-                var canvas = document.getElementById('canvas');
+                let sun = document.getElementById("sun")
+                let canvas = document.getElementById('canvas');
 
-                var w = sun.clientWidth
-                var h = 100
+                let w = sun.clientWidth
+                let h = 100
                 canvas.width = w;
                 canvas.height = h;
 
-                var context = canvas.getContext('2d');
+                let context = canvas.getContext('2d');
 
                 /**
                  * 轨迹
@@ -219,8 +219,8 @@
                 /**
                  * 画太阳
                  */
-                var sun_x
-                var sun_y
+                let sun_x
+                let sun_y
                 sun_x = (1 - t) * (1 - t) * 0 + 2 * t * (1 - t) * w / 2 + t * t * w
                 sun_y = (1 - t) * (1 - t) * h + 2 * t * (1 - t) * (-h / 2) + t * t * h
 
@@ -290,9 +290,9 @@
                  */
                 draw.setBeginEnd(this.day_begin, this.day_end)
 
-                var hour = new Date().getHours();
+                let hour = new Date().getHours();
                 if (hour >= 6 && hour <= 18) {
-                    var t = (hour - 6) / 12
+                    let t = (hour - 6) / 12
                     draw.setTime(t)
                     //this.canvas(t)
                     draw.canvas()
