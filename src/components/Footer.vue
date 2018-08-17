@@ -41,9 +41,7 @@
                  * @type {string}
                  */
                 var city = 'beijing'
-
-                const url = `${city}`
-                const res = await this.$axios.post(`/testApi/audio`, {url})
+                const res = await this.$axios.post(`/testApi/audio`, {city})
                 vid.src = res.data
                 vid.load()
                 vid.play()
