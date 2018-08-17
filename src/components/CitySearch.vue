@@ -1,18 +1,30 @@
 <template>
-    <div class="city">
-        <div class="city-title">
-            <el-input v-model="city" class="inp" placeholder="请输入内容" prefix-icon="el-icon-arrow-left"
-                      @keyup.enter.native="city4main(city)"></el-input>
-        </div>
-        <p class="c-text">热门城市</p>
-        <div class="c-c">
-            <el-row :gutter="20">
-                <el-col :span="5" style="margin-top: 5px" v-for="name in citys">
-                    <el-button class="btn  name" @click.native="city4main(name)">{{name}}</el-button>
+    <el-row>
+        <el-col class="city-title">
+            <el-row>
+                <el-col :xs="{span:22,offset:1}" :sm="{span:18,offset:3}" :md="{span: 12, offset: 6}"
+                        :lg="{span: 12, offset: 6}">
+                    <el-input v-model="city" class="inp" placeholder="请输入城市名称" @keyup.enter.native="city4main(city)">
+                        <el-button slot="prepend" icon="el-icon-arrow-left" @click.native="back"></el-button>
+                        <el-button slot="append" icon="el-icon-search" @click.native="city4main(city)"></el-button>
+                    </el-input>
                 </el-col>
             </el-row>
-        </div>
-    </div>
+
+        </el-col>
+        <el-col :xs="{span:22,offset:1}" :sm="{span:18,offset:3}" :md="{span: 12, offset: 6}" :lg="{span: 12, offset: 6}">
+            <p class="c-text">热门城市</p>
+            <div class="c-c">
+                <el-row :gutter="20">
+                    <el-col :span="6" style="margin-top: 5px" v-for="name in citys">
+                        <el-button class="btn  name" @click.native="city4main(name)">{{name}}</el-button>
+                    </el-col>
+                </el-row>
+            </div>
+
+        </el-col>
+    </el-row>
+
 </template>
 
 <script>
@@ -23,7 +35,7 @@
         data() {
             return {
                 city: '',
-                citys: ["北京", "上海", "广州", "成都", "重庆"]
+                citys: ["北京", "上海", "广州","深圳","西安","合肥", "成都", "重庆"]
             }
         },
         methods: {
@@ -43,27 +55,6 @@
                         type: 'error'
                     });
                 }
-                //console.log(this.$localStorage)
-
-                // for (const name in this.citys) {
-                //     if (this.citys[name] === city) {
-                //         city = name
-                //         break;
-                //     }
-                // }
-                // if (city[0] >= 'z' || city[0] <= 'a') {
-                //     this.$message({
-                //         showClose: true,
-                //         message: '城市名称有误',
-                //         type: 'error'
-                //     });
-                //     return
-                // }
-                /**
-                 * 未实现选择城市传到Main
-                 * 。。。
-                 */
-                //this.$router.push({path: '/'})
             },
             back() {
                 this.$router.back()
@@ -74,33 +65,31 @@
 </script>
 
 <style scoped>
-    .city {
-        width: 100%;
-    }
 
     .city-title {
         width: 100%;
-        height: 50px;
-        background-color: #7ebfff;
+        background-color: #45D7D4;
         text-align: center;
-        line-height: 50px;
+        padding-top: 10px;
+        padding-bottom:10px;
     }
 
     .inp {
-        width: 95%;
+        padding: 2px;
+        width: 100%;
     }
 
     .c-text {
-        margin-left: 15px;
         margin-top: 15px;
     }
 
     .c-c {
         width: 100%;
-        margin-left: 20px;
-        padding-right: 20px;
+        text-align: center;
     }
-    .name{
+
+    .name {
         width: 100%;
+        margin-bottom: 10px;
     }
 </style>
