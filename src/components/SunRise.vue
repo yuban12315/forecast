@@ -129,8 +129,8 @@
             context.fillStyle = '#ff7411';
             //context.lineWidth = 10;
             context.font = 'bold 20px sans-serif'
-            context.fillText(this.day_begin, 30, h - 3);
-            context.fillText(this.day_end, w - 130, h - 3);
+            context.fillText('日出 ' + this.day_begin, 30, h - 3);
+            context.fillText('日落 ' + this.day_end, w - 130, h - 3);
 
             /**
              * 画虚线
@@ -172,8 +172,8 @@
                 humidity: '',
                 feels_like: '',
                 pressure: '',
-                day_begin: '日出 06:00',
-                day_end: '日落 18:00',
+                day_begin: '',
+                day_end: '',
                 draw
             }
         },
@@ -279,6 +279,19 @@
                 this.humidity = res.data.results[0]['now']['humidity'] + "%"
                 this.feels_like = res.data.results[0]['now']['feels_like'] + "℃"
                 this.pressure = res.data.results[0]['now']['pressure'] + "mb"
+
+                this.getSun(city)
+            },
+
+            async getSun(city) {
+                const url = `sun.json?&location=${encodeURIComponent(city)}&language=zh-Hans&start=0&days=7`
+                const res = await this.$axios.post(`/testApi/url`, {url})
+                this.day_begin = res.data.results[0]['sun'][0]['sunrise']
+                this.day_end = res.data.results[0]['sun'][0]['sunset']
+                // console.log(this.day_begin)
+                // console.log(this.day_end - this.day_begin)
+
+                this.showTop()
             },
 
             showTop() {
@@ -286,10 +299,12 @@
                  * 设置日出日落时间
                  */
                 draw.setBeginEnd(this.day_begin, this.day_end)
+                var sunrise = parseInt(this.day_begin.split(":")[0])
+                var sunset = parseInt(this.day_end.split(":")[0])
 
                 let hour = new Date().getHours();
-                if (hour >= 6 && hour <= 18) {
-                    let t = (hour - 6) / 12
+                if (hour >= sunrise && hour <= sunset) {
+                    let t = (hour - sunrise) / (sunset - sunrise)
                     draw.setTime(t)
                     //this.canvas(t)
                     draw.canvas()
@@ -300,9 +315,9 @@
             }
         },
         async mounted() {
-            this.showTop()
             const city = this.$localStorage.get('chosen')
             await this.getWeather(city)
+            //this.showTop()
         }
     }
 
