@@ -80,7 +80,7 @@
 
             },
             async getWeather(city) {
-                const url=`https://api.seniverse.com/v3/weather/now.json?key=afmlz62jdx69kmph&location=${encodeURIComponent(city)}&language=zh-Hans&unit=c`
+                const url=`now.json?&location=${encodeURIComponent(city)}&language=zh-Hans&unit=c`
                 const res=await this.$axios.post(`/testApi/url`,{url})
                 //console.log(res.data.results[0])
                 this.weatherData=res.data.results[0]

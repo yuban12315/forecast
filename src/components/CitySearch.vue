@@ -41,7 +41,7 @@
         methods: {
             async city4main(city) {
                 if(city=='') return
-                const url = `https://api.seniverse.com/v3/weather/hourly.json?key=afmlz62jdx69kmph&location=${encodeURIComponent(city)}&language=zh-Hans&unit=c&start=0&hours=24`
+                const url = `hourly.json?&location=${encodeURIComponent(city)}&language=zh-Hans&unit=c&start=0&hours=24`
                 const res = await this.$axios.post('/testApi/url', {url})
                 if (res.data.hasOwnProperty('results')) {
                     const str = add2storage(this.$localStorage.get('cityName'), city)
